@@ -8,16 +8,43 @@ if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Create music directory
-const musicDir = path.join(publicDir, 'music');
-if (!fs.existsSync(musicDir)) {
-    fs.mkdirSync(musicDir, { recursive: true });
+// Copy styles.css to public directory
+const stylesSource = path.join(__dirname, '..', 'public', 'styles.css');
+const stylesDest = path.join(publicDir, 'styles.css');
+if (fs.existsSync(stylesSource)) {
+    fs.copyFileSync(stylesSource, stylesDest);
 }
 
-// Copy music file if it exists
-const musicSource = path.join(__dirname, '..', 'music', 'our-song.mp3');
-if (fs.existsSync(musicSource)) {
-    fs.copyFileSync(musicSource, path.join(musicDir, 'our-song.mp3'));
+// Copy photos directory if it exists
+const photosSource = path.join(__dirname, '..', 'photos');
+const photosDest = path.join(publicDir, 'photos');
+if (fs.existsSync(photosSource)) {
+    if (!fs.existsSync(photosDest)) {
+        fs.mkdirSync(photosDest, { recursive: true });
+    }
+    const files = fs.readdirSync(photosSource);
+    files.forEach(file => {
+        fs.copyFileSync(
+            path.join(photosSource, file),
+            path.join(photosDest, file)
+        );
+    });
+}
+
+// Copy models directory if it exists
+const modelsSource = path.join(__dirname, '..', 'models');
+const modelsDest = path.join(publicDir, 'models');
+if (fs.existsSync(modelsSource)) {
+    if (!fs.existsSync(modelsDest)) {
+        fs.mkdirSync(modelsDest, { recursive: true });
+    }
+    const files = fs.readdirSync(modelsSource);
+    files.forEach(file => {
+        fs.copyFileSync(
+            path.join(modelsSource, file),
+            path.join(modelsDest, file)
+        );
+    });
 }
 
 // Read photos directory
@@ -41,21 +68,5 @@ const html = ejs.render(template, {
 
 // Write the rendered HTML to public/index.html
 fs.writeFileSync(path.join(publicDir, 'index.html'), html);
-
-// Copy models directory if it exists
-const modelsDir = path.join(__dirname, '..', 'models');
-if (fs.existsSync(modelsDir)) {
-    const publicModelsDir = path.join(publicDir, 'models');
-    if (!fs.existsSync(publicModelsDir)) {
-        fs.mkdirSync(publicModelsDir, { recursive: true });
-    }
-    const files = fs.readdirSync(modelsDir);
-    files.forEach(file => {
-        fs.copyFileSync(
-            path.join(modelsDir, file),
-            path.join(publicModelsDir, file)
-        );
-    });
-}
 
 console.log('Build completed successfully!'); 
