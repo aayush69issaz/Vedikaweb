@@ -60,6 +60,22 @@ body {
 .theme-toggle i {
   color: white;
   font-size: 20px;
+  transition: transform var(--transition-speed);
+}
+
+.theme-toggle:hover i {
+  transform: rotate(180deg);
+}
+
+/* Ensure the toggle is visible in both themes */
+[data-theme="dark"] .theme-toggle {
+  background: var(--gradient-1);
+  box-shadow: 0 5px 15px rgba(255, 77, 109, 0.5);
+}
+
+[data-theme="light"] .theme-toggle {
+  background: var(--gradient-1);
+  box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
 }
 
 /* Modern Card Styles */
