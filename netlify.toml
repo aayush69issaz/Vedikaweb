@@ -1,6 +1,6 @@
 [build]
   base = "."
-  command = "npm install && npm run build && cp -r views public/"
+  command = "npm install && node scripts/build.js"
   publish = "public"
   functions = "functions"
 
