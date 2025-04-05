@@ -8,11 +8,11 @@ const app = express();
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../public/views'));
+app.set('views', path.join(__dirname, '..', 'views'));
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, '../public')));
-app.use('/models', express.static(path.join(__dirname, '../public', 'models')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use('/models', express.static(path.join(__dirname, '..', 'public', 'models')));
 
 // Function to convert HEIC to JPG
 async function convertHeicToJpg(heicPath, jpgPath) {
@@ -35,7 +35,7 @@ async function convertHeicToJpg(heicPath, jpgPath) {
 
 // Function to get all image files from the photos directory
 async function getPhotos() {
-    const photosDir = path.join(__dirname, '../public', 'photos');
+    const photosDir = path.join(__dirname, '..', 'public', 'photos');
     try {
         console.log('Reading photos directory...');
         if (!fs.existsSync(photosDir)) {
@@ -82,7 +82,7 @@ app.get('/', async (req, res) => {
         console.log('Rendering page with photos:', photos);
         
         // Check if views directory exists
-        const viewsDir = path.join(__dirname, '../public/views');
+        const viewsDir = path.join(__dirname, '..', 'views');
         if (!fs.existsSync(viewsDir)) {
             console.error('Views directory does not exist:', viewsDir);
             return res.status(500).send('Views directory not found');
@@ -107,7 +107,7 @@ app.get('/', async (req, res) => {
 
 // Handle all other routes
 app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, '../public', req.path);
+    const filePath = path.join(__dirname, '..', 'public', req.path);
     if (fs.existsSync(filePath)) {
         res.sendFile(filePath);
     } else {
