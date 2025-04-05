@@ -1,26 +1,18 @@
 const express = require('express');
 const serverless = require('serverless-http');
 const path = require('path');
-const ejs = require('ejs');
 const fs = require('fs');
 const heicConvert = require('heic-convert');
 
 const app = express();
 
-// Set view engine
+// Set EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 
-// Middleware
+// Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/models', express.static(path.join(__dirname, '../public', 'models')));
-app.use(express.static('public', {
-    setHeaders: (res, path) => {
-        if (path.endsWith('.mp4')) {
-            res.setHeader('Content-Type', 'video/mp4');
-        }
-    }
-}));
 
 // Function to convert HEIC to JPG
 async function convertHeicToJpg(heicPath, jpgPath) {
@@ -46,6 +38,11 @@ async function getPhotos() {
     const photosDir = path.join(__dirname, '../public', 'photos');
     try {
         console.log('Reading photos directory...');
+        if (!fs.existsSync(photosDir)) {
+            console.error('Photos directory does not exist:', photosDir);
+            return [];
+        }
+        
         const files = fs.readdirSync(photosDir);
         const photos = [];
         
@@ -54,7 +51,6 @@ async function getPhotos() {
             const baseName = path.basename(file, ext);
             
             if (ext === '.heic') {
-                // Convert HEIC to JPG
                 const heicPath = path.join(photosDir, file);
                 const jpgPath = path.join(photosDir, `${baseName}.jpg`);
                 
@@ -79,26 +75,40 @@ async function getPhotos() {
     }
 }
 
-// Routes
+// Route for the main page
 app.get('/', async (req, res) => {
     try {
         const photos = await getPhotos();
         console.log('Rendering page with photos:', photos);
+        
+        // Check if views directory exists
+        const viewsDir = path.join(__dirname, '../views');
+        if (!fs.existsSync(viewsDir)) {
+            console.error('Views directory does not exist:', viewsDir);
+            return res.status(500).send('Views directory not found');
+        }
+        
+        // Check if index.ejs exists
+        const indexPath = path.join(viewsDir, 'index.ejs');
+        if (!fs.existsSync(indexPath)) {
+            console.error('Index template does not exist:', indexPath);
+            return res.status(500).send('Index template not found');
+        }
+        
         res.render('index', { 
             title: 'For My Love',
             photos: photos
         });
     } catch (err) {
         console.error('Error rendering page:', err);
-        res.status(500).send('Error loading page');
+        res.status(500).send(`Error loading page: ${err.message}`);
     }
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+    console.error('Unhandled error:', err);
+    res.status(500).send(`Error: ${err.message}`);
 });
 
-// Export the serverless function
 module.exports.handler = serverless(app); 
