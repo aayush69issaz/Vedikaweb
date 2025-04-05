@@ -8,7 +8,7 @@ const app = express();
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../views'));
+app.set('views', path.join(__dirname, '../public/views'));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
@@ -82,7 +82,7 @@ app.get('/', async (req, res) => {
         console.log('Rendering page with photos:', photos);
         
         // Check if views directory exists
-        const viewsDir = path.join(__dirname, '../views');
+        const viewsDir = path.join(__dirname, '../public/views');
         if (!fs.existsSync(viewsDir)) {
             console.error('Views directory does not exist:', viewsDir);
             return res.status(500).send('Views directory not found');
