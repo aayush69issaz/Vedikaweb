@@ -321,14 +321,10 @@
                 <p>Every moment with you is a treasure. These photos capture our beautiful journey together.</p>
             </div>
             
-            <div class="gallery">
+            <!-- Original photos section -->
+            <div class="photos">
                 <% photos.forEach(function(photo) { %>
-                    <div class="gallery-item">
-                        <a href="/photos/<%= photo %>" data-lightbox="gallery" data-title="Our Special Moments">
-                            <img src="/photos/<%= photo %>" alt="Our Special Moment">
-                        </a>
-                        <div class="caption">Click to view</div>
-                    </div>
+                    <img src="/photos/<%= photo %>" alt="Our Special Moment">
                 <% }); %>
             </div>
         </main>
