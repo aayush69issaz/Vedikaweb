@@ -24,4 +24,27 @@ Thumbs.db
 
 # Build
 dist/
-build/ 
+build/
+
+# System files
+AppData/
+Local Settings/
+Application Data/
+Cookies/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+NetHood/
+PrintHood/
+
+# Browser caches
+*.cache
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Project specific
+public/photos/*.heic
+public/photos/*.HEIC 
