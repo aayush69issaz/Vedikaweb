@@ -105,6 +105,16 @@ app.get('/', async (req, res) => {
     }
 });
 
+// Handle all other routes
+app.get('*', (req, res) => {
+    const filePath = path.join(__dirname, '../public', req.path);
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath);
+    } else {
+        res.status(404).send('Page not found');
+    }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
