@@ -1,6 +1,6 @@
 [build]
   base = "."
-  command = "npm install && npm run build"
+  command = "cd . && npm install && npm run build"
   publish = "public"
   functions = "functions"
 
