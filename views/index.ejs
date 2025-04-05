@@ -7,6 +7,102 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <style>
+        /* ... existing styles ... */
+        
+        /* Lightbox Gallery Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* Love Message Styles */
+        .love-message {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .love-message h2 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .love-message p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Music Player Styles */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .music-player button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .music-player button:hover {
+            background: #ff5252;
+        }
+        
+        .music-player .song-info {
+            display: inline-block;
+            vertical-align: middle;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <!-- Floating Hearts Background -->
@@ -219,6 +315,22 @@
                     </video>
                 </div>
             </div>
+
+            <div class="love-message">
+                <h2>Our Journey Together</h2>
+                <p>Every moment with you is a treasure. These photos capture our beautiful journey together.</p>
+            </div>
+            
+            <div class="gallery">
+                <% photos.forEach(function(photo) { %>
+                    <div class="gallery-item">
+                        <a href="/photos/<%= photo %>" data-lightbox="gallery" data-title="Our Special Moments">
+                            <img src="/photos/<%= photo %>" alt="Our Special Moment">
+                        </a>
+                        <div class="caption">Click to view</div>
+                    </div>
+                <% }); %>
+            </div>
         </main>
     </div>
 
@@ -241,6 +353,11 @@
             <div class="signature-text">Made with ❤️ by</div>
             <div class="signature-name">Aayushmaan</div>
         </div>
+    </div>
+
+    <div class="music-player">
+        <button id="playPauseBtn">Play Music</button>
+        <span class="song-info">Our Song</span>
     </div>
 
     <script>
@@ -312,6 +429,50 @@
         observer.observe(document.body, {
             childList: true,
             subtree: true
+        });
+
+        // Music Player
+        const audio = new Audio('/music/our-song.mp3');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        let isPlaying = false;
+        
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.textContent = 'Play Music';
+            } else {
+                audio.play();
+                playPauseBtn.textContent = 'Pause Music';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Auto-play when page loads (with user interaction)
+        document.addEventListener('click', () => {
+            if (!isPlaying) {
+                audio.play();
+                playPauseBtn.textContent = 'Pause Music';
+                isPlaying = true;
+            }
+        }, { once: true });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        // Initialize lightbox
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': 'Photo %1 of %2'
+        });
+        
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>

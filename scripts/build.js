@@ -8,6 +8,18 @@ if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
 }
 
+// Create music directory
+const musicDir = path.join(publicDir, 'music');
+if (!fs.existsSync(musicDir)) {
+    fs.mkdirSync(musicDir, { recursive: true });
+}
+
+// Copy music file if it exists
+const musicSource = path.join(__dirname, '..', 'music', 'our-song.mp3');
+if (fs.existsSync(musicSource)) {
+    fs.copyFileSync(musicSource, path.join(musicDir, 'our-song.mp3'));
+}
+
 // Read photos directory
 const photosDir = path.join(publicDir, 'photos');
 const photos = [];
