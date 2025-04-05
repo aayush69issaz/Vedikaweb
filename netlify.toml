@@ -1,6 +1,6 @@
 [build]
   base = "."
-  command = "ls -la && npm install && npm run build"
+  command = "npm install && npm run build"
   publish = "public"
   functions = "functions"
 
@@ -10,7 +10,7 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/server"
   status = 200
 
 [[plugins]]
