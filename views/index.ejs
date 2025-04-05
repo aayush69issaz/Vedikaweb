@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts-bg">
+        <% for(let i = 0; i < 20; i++) { %>
+            <div class="floating-heart-bg">❤</div>
+        <% } %>
+    </div>
+
+    <!-- Heart Balloons -->
+    <div class="heart-balloon"></div>
+    <div class="heart-balloon"></div>
+    <div class="heart-balloon"></div>
+    <div class="heart-balloon"></div>
+    <div class="heart-balloon"></div>
+    <div class="heart-balloon"></div>
+
+    <!-- Modern Love Elements -->
+    <div class="modern-love-element"></div>
+    <div class="modern-love-element"></div>
+    <div class="modern-love-element"></div>
+    <div class="modern-love-element"></div>
+    <div class="modern-love-element"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkle" style="top: 20%; left: 30%;"></div>
+    <div class="sparkle" style="top: 40%; left: 60%;"></div>
+    <div class="sparkle" style="top: 60%; left: 20%;"></div>
+    <div class="sparkle" style="top: 80%; left: 70%;"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title gradient-text heartbeat">For My Love</h1>
+            <!-- Title Photo -->
+            <div class="photo-frame title-photo">
+                <img src="/photos/<%= photos[0] %>" alt="Our beautiful moment" class="gallery-photo">
+                <div class="photo-overlay">
+                    <span class="heart-icon">❤</span>
+                </div>
+            </div>
+            <div class="hearts-container">
+                <div class="heart"></div>
+                <div class="heart"></div>
+                <div class="heart"></div>
+            </div>
+        </header>
+        
+        <main class="content">
+            <section class="love-section">
+                <!-- Corner Photos -->
+                <div class="photo-frame corner-photo top-left">
+                    <img src="/photos/<%= photos[1] %>" alt="Our beautiful moment" class="gallery-photo">
+                    <div class="photo-overlay">
+                        <span class="heart-icon">❤</span>
+                    </div>
+                </div>
+                
+                <div class="photo-frame corner-photo top-right">
+                    <img src="/photos/<%= photos[2] %>" alt="Our beautiful moment" class="gallery-photo">
+                    <div class="photo-overlay">
+                        <span class="heart-icon">❤</span>
+                    </div>
+                </div>
+
+                <div class="floating-hearts">
+                    <div class="floating-heart">❤</div>
+                    <div class="floating-heart">❤</div>
+                    <div class="floating-heart">❤</div>
+                    <div class="floating-heart">❤</div>
+                    <div class="floating-heart">❤</div>
+                </div>
+                
+                <!-- New Love Text Section -->
+                <div class="love-text-container">
+                    <h2 class="love-text floating-love-text">
+                        <span class="love-word">I</span>
+                        <span class="love-word">LOVE</span>
+                        <span class="love-word">YOU</span>
+                        <span class="love-word">VEDIKA</span>
+                    </h2>
+                </div>
+
+                <!-- First Message with Photo -->
+                <div class="message-box love-message-box">
+                    <h2 class="glow-text heartbeat">My Dearest Vedika</h2>
+                    <div class="photo-frame message-photo">
+                        <img src="/photos/<%= photos[3] %>" alt="Our beautiful moment" class="gallery-photo">
+                        <div class="photo-overlay">
+                            <span class="heart-icon">❤</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <p class="love-message">
+                            <span class="highlight">I just wanted to take a moment</span> to remind you how incredibly special you are to me. Every time I hear your voice or see your smile, my world lights up in ways I can't fully explain. You're not just beautiful on the outside — your heart, your kindness, and your vibe make you one in a million. Being with you feels like peace and adventure all wrapped into one. You make ordinary days feel magical, and no matter how chaotic life gets, just knowing you're by my side makes everything feel okay.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Second Message with Photo -->
+                <div class="message-box love-message-box">
+                    <div class="photo-frame message-photo">
+                        <img src="/photos/<%= photos[4] %>" alt="Our beautiful moment" class="gallery-photo">
+                        <div class="photo-overlay">
+                            <span class="heart-icon">❤</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <p class="love-message">
+                            I know sometimes things can feel overwhelming, but I promise you — everything will be alright. We'll face the highs and lows together, hand in hand. You don't have to carry the weight of the world alone, because I'm right here with you, always. You are stronger than you realize, and I believe in you endlessly. You are my heart's home, my safe place, and the most beautiful soul I've ever known. I'm so lucky to have you in my life, and I'll never stop appreciating you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Poem Section with Photos -->
+                <div class="poem-section">
+                    <div class="poem-container love-poem-box">
+                        <h3 class="poem-title heartbeat">A Poem for You</h3>
+                        <div class="poem-content">
+                            <div class="poem-photos">
+                                <div class="poem-photo-frame">
+                                    <img src="/photos/<%= photos[6] %>" alt="Our Moment" class="poem-photo">
+                                    <div class="poem-photo-overlay">
+                                        <span class="heart-icon">❤</span>
+                                    </div>
+                                </div>
+                                <div class="poem-photo-frame">
+                                    <img src="/photos/<%= photos[7] %>" alt="Our Moment" class="poem-photo">
+                                    <div class="poem-photo-overlay">
+                                        <span class="heart-icon">❤</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="poem-stanzas">
+                                <div class="stanza">
+                                    <p>In your eyes, I found my home,</p>
+                                    <p>A love so pure, it makes me whole.</p>
+                                </div>
+                                <div class="stanza">
+                                    <p>Every moment with you is a treasure,</p>
+                                    <p>A bond that time cannot measure.</p>
+                                </div>
+                                <div class="stanza">
+                                    <p>Your smile brightens my darkest days,</p>
+                                    <p>In your arms, I find my peace always.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-grid-section">
+                    <div class="photo-grid">
+                        <% for(let i = 8; i < Math.min(photos.length, 12); i++) { %>
+                            <div class="photo-grid-item">
+                                <div class="photo-grid-frame">
+                                    <img src="/photos/<%= photos[i] %>" alt="Our Moment" class="photo-grid-image">
+                                    <div class="photo-grid-overlay">
+                                        <span class="heart-icon">❤</span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- Final Message Section -->
+                <div class="message-box final-message love-message-box">
+                    <div class="photo-frame message-photo">
+                        <img src="/photos/<%= photos[photos.length - 3] %>" alt="Our beautiful moment" class="gallery-photo">
+                        <div class="photo-overlay">
+                            <span class="heart-icon">❤</span>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <p class="love-message">
+                            No matter where life takes us or what challenges come our way, I want you to always remember this — everything will be okay. We've got each other, and that's our superpower. I'll be here to hold your hand through every storm and dance with you under every rainbow. You don't have to face anything alone, because I'll always be right by your side — cheering you on, calming your worries, and loving you more every single day. You're my heart's favorite place, and I'll never stop reminding you just how much you mean to me.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bottom Corner Photos -->
+                <div class="photo-frame corner-photo bottom-left">
+                    <img src="/photos/<%= photos[photos.length - 2] %>" alt="Our beautiful moment" class="gallery-photo">
+                    <div class="photo-overlay">
+                        <span class="heart-icon">❤</span>
+                    </div>
+                </div>
+                
+                <div class="photo-frame corner-photo bottom-right">
+                    <img src="/photos/<%= photos[photos.length - 1] %>" alt="Our beautiful moment" class="gallery-photo">
+                    <div class="photo-overlay">
+                        <span class="heart-icon">❤</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="message-box">
+                <h3 class="message-title heartbeat">My dearest Vedika</h3>
+                <p class="message-text">I want you to know that I am here for you, always. No matter what challenges life throws our way, I will stand by your side, supporting you, loving you, and believing in you. Your strength and resilience inspire me every day, and I am so proud of the person you are becoming.</p>
+                <p class="message-text">Remember that you are never alone. I am just a message or a call away, ready to listen, to comfort, and to help in any way I can. Your happiness means everything to me, and I will do whatever it takes to see you smile.</p>
+                <p class="message-text">I love you more than words can express, and I will continue to show you that love every single day.</p>
+            </div>
+
+            <div class="your-edit-section">
+                <h3 class="your-edit-title heartbeat">Your Edit</h3>
+                <div class="video-container">
+                    <video class="your-edit-video" controls autoplay loop muted>
+                        <source src="/videos/0227.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- About the Creator Section -->
+    <div class="creator-section">
+        <div class="creator-container">
+            <h3 class="creator-title heartbeat">About the Creator</h3>
+            <div class="creator-message">
+                <p class="creator-text">This website is created by the boy who will always continue to love you and support.</p>
+                <p class="creator-text">Hope that you always stay with me and never leave this silly boy.</p>
+                <p class="creator-signature">By the most loyal and loving boy</p>
+                <p class="creator-name">-Aayushmaan Thakur</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signature Section -->
+    <div class="signature-section">
+        <div class="signature-container">
+            <div class="signature-text">Made with ❤️ by</div>
+            <div class="signature-name">Aayushmaan</div>
+        </div>
+    </div>
+
+    <script>
+        // Load face detection models
+        Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+        ]).then(startFaceDetection);
+
+        async function processImage(img) {
+            try {
+                // Wait for image to load
+                await new Promise((resolve) => {
+                    if (img.complete) resolve();
+                    else img.onload = resolve;
+                });
+
+                // Detect face
+                const detections = await faceapi.detectSingleFace(img, new faceapi.TinyFaceDetectorOptions());
+                
+                if (detections) {
+                    const box = detections.box;
+                    const imgWidth = img.naturalWidth;
+                    const imgHeight = img.naturalHeight;
+                    
+                    // Calculate the crop area to include the face and some space around it
+                    const scale = 2.5; // Increased scale for more space around face
+                    const width = box.width * scale;
+                    const height = width * 1.2; // Slightly taller than wide for better face display
+                    
+                    // Calculate position to center the face
+                    const x = Math.max(0, box.x - (width - box.width) / 2);
+                    const y = Math.max(0, box.y - (height - box.height) / 2);
+                    
+                    // Calculate percentage positions for CSS
+                    const xPercent = (x / imgWidth) * 100;
+                    const yPercent = (y / imgHeight) * 100;
+                    
+                    // Apply the crop using CSS
+                    img.style.objectPosition = `${xPercent}% ${yPercent}%`;
+                    img.style.objectFit = 'cover';
+                    
+                    // Add a class to indicate face was detected
+                    img.parentElement.classList.add('face-detected');
+                }
+            } catch (error) {
+                console.error('Error processing image:', error);
+            }
+        }
+
+        function startFaceDetection() {
+            // Process all photos on the page
+            const allPhotos = document.querySelectorAll('.gallery-photo');
+            allPhotos.forEach(processImage);
+        }
+
+        // Re-run face detection when images are loaded dynamically
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    const newPhotos = mutation.target.querySelectorAll('.gallery-photo:not(.face-detected)');
+                    newPhotos.forEach(processImage);
+                }
+            });
+        });
+
+        // Start observing the document
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,22 @@
+{
+  "name": "vedikaweb",
+  "version": "1.0.0",
+  "description": "A romantic website for Vedika",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build.js",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "heic-convert": "^1.2.4",
+    "ejs": "^3.1.9",
+    "serverless-http": "^3.2.0"
+  },
+  "engines": {
+    "node": "16.20.2",
+    "npm": "8.19.4"
+  }
+}
