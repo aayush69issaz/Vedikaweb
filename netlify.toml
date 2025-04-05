@@ -3,20 +3,14 @@
   command = "npm install && npm run build"
   publish = "public"
   functions = "functions"
-  include = ["views/*", "public/*", "functions/*"]
 
 [build.environment]
   NODE_VERSION = "16.20.2"
   NPM_VERSION = "8.19.4"
 
 [[redirects]]
-  from = "/"
-  to = "/.netlify/functions/server"
-  status = 200
-
-[[redirects]]
   from = "/*"
-  to = "/.netlify/functions/server"
+  to = "/index.html"
   status = 200
 
 [[plugins]]

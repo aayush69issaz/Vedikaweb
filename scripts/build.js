@@ -1,42 +1,49 @@
 const fs = require('fs');
 const path = require('path');
+const ejs = require('ejs');
 
 // Create public directory if it doesn't exist
-const publicDir = path.join(__dirname, '../public');
+const publicDir = path.join(__dirname, '..', 'public');
 if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Copy views directory
-const viewsSource = path.join(__dirname, '../views');
-const viewsDest = path.join(publicDir, 'views');
-
-if (!fs.existsSync(viewsDest)) {
-    fs.mkdirSync(viewsDest, { recursive: true });
+// Read photos directory
+const photosDir = path.join(publicDir, 'photos');
+const photos = [];
+if (fs.existsSync(photosDir)) {
+    const files = fs.readdirSync(photosDir);
+    photos.push(...files.filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+    }));
 }
 
-// Copy all files from views to public/views
-const copyDir = (src, dest) => {
-    const entries = fs.readdirSync(src, { withFileTypes: true });
+// Read and render the EJS template
+const templatePath = path.join(__dirname, '..', 'views', 'index.ejs');
+const template = fs.readFileSync(templatePath, 'utf8');
+const html = ejs.render(template, { 
+    title: 'For My Love',
+    photos: photos
+});
 
-    for (const entry of entries) {
-        const srcPath = path.join(src, entry.name);
-        const destPath = path.join(dest, entry.name);
+// Write the rendered HTML to public/index.html
+fs.writeFileSync(path.join(publicDir, 'index.html'), html);
 
-        if (entry.isDirectory()) {
-            fs.mkdirSync(destPath, { recursive: true });
-            copyDir(srcPath, destPath);
-        } else {
-            fs.copyFileSync(srcPath, destPath);
-        }
+// Copy models directory if it exists
+const modelsDir = path.join(__dirname, '..', 'models');
+if (fs.existsSync(modelsDir)) {
+    const publicModelsDir = path.join(publicDir, 'models');
+    if (!fs.existsSync(publicModelsDir)) {
+        fs.mkdirSync(publicModelsDir, { recursive: true });
     }
-};
-
-copyDir(viewsSource, viewsDest);
-
-// Copy server.js
-const serverSource = path.join(__dirname, '../server.js');
-const serverDest = path.join(publicDir, 'server.js');
-fs.copyFileSync(serverSource, serverDest);
+    const files = fs.readdirSync(modelsDir);
+    files.forEach(file => {
+        fs.copyFileSync(
+            path.join(modelsDir, file),
+            path.join(publicModelsDir, file)
+        );
+    });
+}
 
 console.log('Build completed successfully!'); 
