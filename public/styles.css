@@ -483,4 +483,61 @@ body::before {
   .container {
     margin: 10px;
   }
+}
+
+/* Red Ribbon Effect */
+.ribbon {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(50%, -50%) rotate(45deg);
+  transition: opacity 0.5s ease;
+}
+
+.ribbon.visible {
+  opacity: 1;
+}
+
+.ribbon::before {
+  content: 'About the Creator';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 40px;
+  background: #ff4d4d;
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transform: translate(0, 50%);
+}
+
+.ribbon::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 40px;
+  background: #ff4d4d;
+  transform: translate(0, 50%);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a subtle animation to the ribbon */
+@keyframes ribbonPulse {
+  0% { transform: translate(50%, -50%) rotate(45deg) scale(1); }
+  50% { transform: translate(50%, -50%) rotate(45deg) scale(1.05); }
+  100% { transform: translate(50%, -50%) rotate(45deg) scale(1); }
+}
+
+.ribbon.visible {
+  animation: ribbonPulse 2s infinite;
 } 

@@ -21,6 +21,8 @@
     </style>
 </head>
 <body>
+    <div class="ribbon" id="creatorRibbon"></div>
+
     <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
         <i class="fas fa-moon"></i>
     </button>
@@ -31,6 +33,24 @@
     </div>
 
     <script>
+        // Ribbon visibility control
+        const ribbon = document.getElementById('creatorRibbon');
+        const creatorSection = document.querySelector('#creator-section'); // Make sure this ID matches your creator section
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    ribbon.classList.add('visible');
+                } else {
+                    ribbon.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (creatorSection) {
+            observer.observe(creatorSection);
+        }
+
         // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const icon = themeToggle.querySelector('i');
@@ -64,7 +84,7 @@
         });
 
         // Add fade-in animation to elements as they come into view
-        const observer = new IntersectionObserver((entries) => {
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('fade-in');
@@ -73,7 +93,7 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.card, .gallery-item').forEach(el => {
-            observer.observe(el);
+            fadeObserver.observe(el);
         });
     </script>
 </body>
