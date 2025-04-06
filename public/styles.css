@@ -89,12 +89,33 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
 }
 
 .card:hover {
   transform: translateY(-10px) scale(1.02);
   box-shadow: 0 20px 40px var(--card-shadow);
-  animation: pulse 2s infinite;
 }
 
 /* Modern Button Styles */
@@ -110,6 +131,28 @@ button {
   transition: all var(--transition-speed);
   box-shadow: 0 5px 15px var(--card-shadow);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
 }
 
 button:hover {
@@ -127,6 +170,22 @@ h1, h2, h3 {
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px var(--card-shadow);
   animation: slideIn 1s ease-out;
+  position: relative;
+}
+
+h1::after, h2::after, h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-1);
+  transition: width var(--transition-speed);
+}
+
+h1:hover::after, h2:hover::after, h3:hover::after {
+  width: 100%;
 }
 
 /* Modern Image Gallery */
@@ -146,10 +205,29 @@ h1, h2, h3 {
   animation: fadeInUp 0.8s ease-out;
 }
 
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
 .gallery-item:hover {
   transform: scale(1.05);
   box-shadow: 0 15px 30px var(--card-shadow);
-  animation: float 3s ease-in-out infinite;
 }
 
 .gallery-item img {
@@ -268,6 +346,28 @@ input:focus, textarea:focus {
   margin: 25px;
   box-shadow: 0 15px 30px var(--card-shadow);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.glass-effect:hover::before {
+  left: 100%;
 }
 
 /* Enhanced Animations */
@@ -297,6 +397,16 @@ input:focus, textarea:focus {
 @keyframes fadeInUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Stylish Border Styles */
