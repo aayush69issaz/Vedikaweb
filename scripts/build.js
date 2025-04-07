@@ -3,68 +3,57 @@ const path = require('path');
 const ejs = require('ejs');
 
 // Create public directory if it doesn't exist
-const publicDir = path.join(__dirname, '..', 'public');
+const publicDir = path.join(__dirname, '../public');
 if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Copy styles.css to public directory
-const stylesSource = path.join(__dirname, '..', 'public', 'styles.css');
-const stylesDest = path.join(publicDir, 'styles.css');
-if (fs.existsSync(stylesSource)) {
-    fs.copyFileSync(stylesSource, stylesDest);
-}
+// Copy styles.css
+fs.copyFileSync(
+    path.join(__dirname, '../styles.css'),
+    path.join(publicDir, 'styles.css')
+);
 
 // Copy photos directory if it exists
-const photosSource = path.join(__dirname, '..', 'photos');
-const photosDest = path.join(publicDir, 'photos');
-if (fs.existsSync(photosSource)) {
-    if (!fs.existsSync(photosDest)) {
-        fs.mkdirSync(photosDest, { recursive: true });
+const photosDir = path.join(__dirname, '../photos');
+if (fs.existsSync(photosDir)) {
+    const publicPhotosDir = path.join(publicDir, 'photos');
+    if (!fs.existsSync(publicPhotosDir)) {
+        fs.mkdirSync(publicPhotosDir, { recursive: true });
     }
-    const files = fs.readdirSync(photosSource);
-    files.forEach(file => {
+    const photos = fs.readdirSync(photosDir);
+    photos.forEach(photo => {
         fs.copyFileSync(
-            path.join(photosSource, file),
-            path.join(photosDest, file)
+            path.join(photosDir, photo),
+            path.join(publicPhotosDir, photo)
         );
     });
 }
 
 // Copy models directory if it exists
-const modelsSource = path.join(__dirname, '..', 'models');
-const modelsDest = path.join(publicDir, 'models');
-if (fs.existsSync(modelsSource)) {
-    if (!fs.existsSync(modelsDest)) {
-        fs.mkdirSync(modelsDest, { recursive: true });
+const modelsDir = path.join(__dirname, '../models');
+if (fs.existsSync(modelsDir)) {
+    const publicModelsDir = path.join(publicDir, 'models');
+    if (!fs.existsSync(publicModelsDir)) {
+        fs.mkdirSync(publicModelsDir, { recursive: true });
     }
-    const files = fs.readdirSync(modelsSource);
-    files.forEach(file => {
+    const models = fs.readdirSync(modelsDir);
+    models.forEach(model => {
         fs.copyFileSync(
-            path.join(modelsSource, file),
-            path.join(modelsDest, file)
+            path.join(modelsDir, model),
+            path.join(publicModelsDir, model)
         );
     });
 }
 
-// Read photos directory
-const photosDir = path.join(publicDir, 'photos');
-const photos = [];
-if (fs.existsSync(photosDir)) {
-    const files = fs.readdirSync(photosDir);
-    photos.push(...files.filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
-    }));
-}
+// Read the photos directory to get image files
+const photos = fs.readdirSync(photosDir).filter(file => 
+    file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png')
+);
 
-// Read and render the EJS template
-const templatePath = path.join(__dirname, '..', 'views', 'index.ejs');
-const template = fs.readFileSync(templatePath, 'utf8');
-const html = ejs.render(template, { 
-    title: 'For My Love',
-    photos: photos
-});
+// Render the EJS template
+const template = fs.readFileSync(path.join(__dirname, '../views/index.ejs'), 'utf8');
+const html = ejs.render(template, { photos });
 
 // Write the rendered HTML to public/index.html
 fs.writeFileSync(path.join(publicDir, 'index.html'), html);
