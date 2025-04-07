@@ -19,17 +19,5 @@
   "engines": {
     "node": "16.20.2",
     "npm": "8.19.4"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aayush69issaz/vedikaweb.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/aayush69issaz/vedikaweb/issues"
-  },
-  "homepage": "https://github.com/aayush69issaz/vedikaweb#readme"
+  }
 }
