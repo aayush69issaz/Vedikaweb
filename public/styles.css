@@ -540,4 +540,41 @@ body::before {
 
 .ribbon.visible {
   animation: ribbonPulse 2s infinite;
+}
+
+/* Poetic Text Styles */
+.poetic-text {
+    font-size: 1.1em;
+    line-height: 1.8;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    font-style: italic;
+}
+
+.poetic-text .highlight {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
+}
+
+/* Dark theme specific styles */
+[data-theme="dark"] .poetic-text {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .poetic-text .highlight {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+}
+
+/* Light theme specific styles */
+[data-theme="light"] .poetic-text {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .poetic-text .highlight {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
 } 
