@@ -27,15 +27,21 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <!-- Your existing content here -->
     <div class="container">
-        <!-- Original content remains unchanged -->
+        <!-- Your existing content here -->
+        
+        <section id="creator-section" class="section">
+            <h2>About the Creator</h2>
+            <!-- Add your creator content here -->
+        </section>
+        
+        <!-- Rest of your content -->
     </div>
 
     <script>
         // Ribbon visibility control
         const ribbon = document.getElementById('creatorRibbon');
-        const creatorSection = document.querySelector('#creator-section'); // Make sure this ID matches your creator section
+        const creatorSection = document.querySelector('#creator-section');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

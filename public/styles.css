@@ -490,8 +490,8 @@ body::before {
   position: fixed;
   top: 0;
   right: 0;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
   z-index: 999;
   pointer-events: none;
