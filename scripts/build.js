@@ -8,11 +8,11 @@ if (!fs.existsSync(publicDir)) {
     fs.mkdirSync(publicDir, { recursive: true });
 }
 
-// Copy styles.css
-fs.copyFileSync(
-    path.join(__dirname, '../styles.css'),
-    path.join(publicDir, 'styles.css')
-);
+// Copy styles.css if it exists
+const stylesPath = path.join(__dirname, '../styles.css');
+if (fs.existsSync(stylesPath)) {
+    fs.copyFileSync(stylesPath, path.join(publicDir, 'styles.css'));
+}
 
 // Copy photos directory if it exists
 const photosDir = path.join(__dirname, '../photos');
@@ -46,16 +46,35 @@ if (fs.existsSync(modelsDir)) {
     });
 }
 
-// Read the photos directory to get image files
-const photos = fs.readdirSync(photosDir).filter(file => 
-    file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png')
-);
+// Get photos list safely
+let photos = [];
+if (fs.existsSync(photosDir)) {
+    photos = fs.readdirSync(photosDir).filter(file => 
+        file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png')
+    );
+}
 
-// Render the EJS template
-const template = fs.readFileSync(path.join(__dirname, '../views/index.ejs'), 'utf8');
-const html = ejs.render(template, { photos });
-
-// Write the rendered HTML to public/index.html
-fs.writeFileSync(path.join(publicDir, 'index.html'), html);
+// Copy index.html directly to public directory
+const indexHtmlPath = path.join(__dirname, '../public/index.html');
+if (fs.existsSync(indexHtmlPath)) {
+    fs.copyFileSync(indexHtmlPath, path.join(publicDir, 'index.html'));
+} else {
+    // If index.html doesn't exist, create a basic one
+    const basicHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>For My Love</h1>
+    </div>
+</body>
+</html>`;
+    fs.writeFileSync(path.join(publicDir, 'index.html'), basicHtml);
+}
 
 console.log('Build completed successfully!'); 
